@@ -1,0 +1,199 @@
+- id: '1'
+  alias: Notifica ingressi e uscite
+  trigger:
+    platform: state
+    entity_id: device_tracker.iphone_di_roberto, device_tracker.tamar_s_iphone
+  condition:
+    condition: template
+    value_template: '{{ trigger.to_state.state != trigger.from_state.state }}'
+  action:
+    service: notify.mobile_app_iphone_di_roberto
+    data_template:
+      title: Entrance/Exits
+      message: >
+        '{% if trigger.to_state.state == ''home'' %} Rilevato ingresso in casa
+        da parte di {{ trigger.from_state.attributes.friendly_name }} {% elif (trigger.to_state.state
+        == ''away'' or trigger.to_state.state == ''not_home'') and trigger.from_state.state
+        == ''home'' %} Rilevata uscita da parte di {{ trigger.from_state.attributes.friendly_name
+        }} {% endif %}'
+      
+  #Cesano 6:30 --> 612
+  #Cesano 7:00 --> 1614 --> N00074
+  #Cesano 7:30 --> 618
+  #cesano 8:00 --> 1622
+        
+- id: '2'
+  alias: Notifica Treno
+  trigger:
+  - above: '2'
+    entity_id: sensor.ritardo_1622
+    platform: numeric_state
+  condition:
+    condition: time
+    after: '07:00:00'
+    before: '08:00:00'
+  action:
+  - data_template:
+      message: 'Il treno delle 8:00 è in ritardo di {{states.sensor.ritardo_1622.state}} minuti , ora si trova a {{states.sensor.where_1622.state}} '
+      title: Treno Cesano Maderno 8:00
+    service: notify.mobile_app_iphone_di_roberto
+    
+- id: '3'
+  alias: Notifica uscita work
+  trigger:
+    platform: state
+    entity_id: device_tracker.iphone_di_roberto
+  condition:
+    condition: template
+    value_template: '{{ trigger.to_state.state != trigger.from_state.state }}'
+  action:
+    service: notify.mobile_app_iphone_di_roberto
+    data_template:
+      title: Entrance/Exits
+      message: '{% if (trigger.to_state.state == ''away'' or trigger.to_state.state == ''not_home'') and trigger.from_state.state == ''work'' %} Roby coming home !!! {% endif %}'
+      
+- id: '4'
+  alias: Notifica Treno
+  trigger:
+  - above: '2'
+    entity_id: sensor.ritardo_1614
+    platform: numeric_state
+  condition:
+    condition: time
+    after: '06:00:00'
+    before: '07:00:00'
+  action:
+  - data_template:
+      message: 'Il treno delle 7:00 è in ritardo di {{states.sensor.ritardo_1614.state}} minuti , ora si trova a {{states.sensor.where_1614.state}} '
+      title: Treno Cesano Maderno 7:00
+    service: notify.mobile_app_iphone_di_roberto
+    
+- id: '5'
+  alias: Notifica Treno
+  trigger:
+  - above: '2'
+    entity_id: sensor.ritardo_618
+    platform: numeric_state
+  condition:
+    condition: time
+    after: '06:30:00'
+    before: '07:30:00'
+  action:
+  - data_template:
+      message: 'Il treno delle 7:30 è in ritardo di {{states.sensor.ritardo_618.state}} minuti , ora si trova a {{states.sensor.where_618.state}} '
+      title: Treno Cesano Maderno 7:30
+    service: notify.mobile_app_iphone_di_roberto
+- id: '6'
+  alias: Notifica Treno
+  trigger:
+  - above: '2'
+    entity_id: sensor.ritardo_612
+    platform: numeric_state
+  condition:
+    condition: time
+    after: '06:00:00'
+    before: '06:30:00'
+  action:
+  - data_template:
+      message: 'Il treno delle 6:30 è in ritardo di {{states.sensor.ritardo_612.state}} minuti , ora si trova a {{states.sensor.where_612.state}} '
+      title: Treno Cesano Maderno 6:30
+    service: notify.mobile_app_iphone_di_roberto
+
+
+- id: '7'
+  alias: raiseup bagno light with motion
+  trigger:
+    platform: state
+    entity_id: binary_sensor.m_bagno
+    to: 'on'
+  condition:
+    condition: time
+    after: '07:00:00'
+    before: '19:00:00'
+  action:
+    service: light.turn_on
+    entity_id: light.bagno
+    data_template:
+      transition: 10
+      brightness: 255
+      
+- id: '7a'
+  alias: raiseup bagno light with motion
+  trigger:
+    platform: state
+    entity_id: binary_sensor.m_bagno
+    to: 'on'
+  condition:
+    condition: time
+    after: '19:00:00'
+  action:
+    service: light.turn_on
+    entity_id: light.bagno
+    data_template:
+      transition: 10
+      brightness: 70
+      
+- id: '8'
+  alias: raisedown bagno light with motion
+  trigger:
+    platform: state
+    entity_id: binary_sensor.m_bagno
+    to: 'off'
+    for:
+      minutes: 5
+  condition:
+    condition: time
+    after: '07:00:00'
+    before: '19:00:00'
+  action:
+    service: light.turn_on
+    entity_id: light.bagno
+    data_template:
+      transition: 90
+      brightness: 10
+      
+- id: '8a'
+  alias: raisedown bagno light with motion (night)
+  trigger:
+    platform: state
+    entity_id: binary_sensor.m_bagno
+    to: 'off'
+    for:
+      minutes: 10
+  condition:
+    condition: time
+    after: '19:00:00'
+  action:
+    service: light.turn_on
+    entity_id: light.bagno
+    data_template:
+      transition: 45
+      brightness: 1
+      
+      
+- id: '10'
+  alias: all of if away
+  trigger:
+    platform: state
+    entity_id: group.family
+    from: 'home'
+  action:
+    service: light.turn_off
+    entity_id: group.all_lights
+    data_template:
+      transition: 10
+      
+- id: '11'
+  alias: all on on come back 
+  trigger:
+    platform: state
+    entity_id: group.family
+    to: 'home'
+  action:
+    service: light.turn_on
+    entity_id: group.all_lights
+    data_template:
+      transition: 10
+      brightness: 10
+      
+     

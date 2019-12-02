@@ -11,11 +11,9 @@
     data_template:
       title: Entrance/Exits
       message: >
-        '{% if trigger.to_state.state == ''home'' %} Rilevato ingresso in casa
-        da parte di {{ trigger.from_state.attributes.friendly_name }} {% elif (trigger.to_state.state
-        == ''away'' or trigger.to_state.state == ''not_home'') and trigger.from_state.state
-        == ''home'' %} Rilevata uscita da parte di {{ trigger.from_state.attributes.friendly_name
-        }} {% endif %}'
+        '{% if trigger.to_state.state == ''home'' %} Rilevato ingresso in casa da parte di {{ trigger.from_state.attributes.friendly_name }}
+         {% elif (trigger.to_state.state == ''away'' or trigger.to_state.state == ''not_home'') and trigger.from_state.state == ''home'' %} 
+         Rilevata uscita da parte di {{ trigger.from_state.attributes.friendly_name }} {% endif %}'
       
   #Cesano 6:30 --> 612
   #Cesano 7:00 --> 1614 --> N00074
@@ -34,8 +32,8 @@
     before: '08:00:00'
   action:
   - data_template:
-      message: 'Il treno delle 8:00 è in ritardo di {{states.sensor.ritardo_1622.state}} minuti , ora si trova a {{states.sensor.where_1622.state}} '
-      title: Treno Cesano Maderno 8:00
+      message: 'h {{states.sensor.when_1622.state}} - staz {{states.sensor.where_1622.state}} '
+      title: 'tr 8:00 + {{states.sensor.ritardo_1622.state}} min'
     service: notify.mobile_app_iphone_di_roberto
     
 - id: '3'

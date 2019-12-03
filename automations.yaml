@@ -57,26 +57,18 @@
     condition: time
     after: '07:00:00'
     before: '08:00:00'
+    weekday:
+      - mon
+      - tue
+      - wed
+      - thu
+      - fri
   action:
   - data_template:
       message: 'h {{states.sensor.when_1622.state}} - staz {{states.sensor.where_1622.state}} '
       title: 'tr 8:00 + {{states.sensor.ritardo_1622.state}} min'
     service: notify.mobile_app_iphone_di_roberto
-    
-- id: '3'
-  alias: Notifica uscita work
-  trigger:
-    platform: state
-    entity_id: device_tracker.iphone_di_roberto
-  condition:
-    condition: template
-    value_template: '{{ trigger.to_state.state != trigger.from_state.state }}'
-  action:
-    service: notify.mobile_app_iphone_di_roberto
-    data_template:
-      title: Entrance/Exits
-      message: '{% if (trigger.to_state.state == ''away'' or trigger.to_state.state == ''not_home'') and trigger.from_state.state == ''work'' %} Roby coming home !!! {% endif %}'
-      
+          
 - id: '4'
   alias: Notifica Treno
   trigger:
@@ -87,6 +79,12 @@
     condition: time
     after: '06:00:00'
     before: '07:00:00'
+    weekday:
+      - mon
+      - tue
+      - wed
+      - thu
+      - fri
   action:
   - data_template:
       message: 'Il treno delle 7:00 è in ritardo di {{states.sensor.ritardo_1614.state}} minuti , ora si trova a {{states.sensor.where_1614.state}} '
@@ -103,6 +101,12 @@
     condition: time
     after: '06:30:00'
     before: '07:30:00'
+    weekday:
+      - mon
+      - tue
+      - wed
+      - thu
+      - fri
   action:
   - data_template:
       message: 'Il treno delle 7:30 è in ritardo di {{states.sensor.ritardo_618.state}} minuti , ora si trova a {{states.sensor.where_618.state}} '
@@ -118,6 +122,12 @@
     condition: time
     after: '06:00:00'
     before: '06:30:00'
+    weekday:
+      - mon
+      - tue
+      - wed
+      - thu
+      - fri
   action:
   - data_template:
       message: 'Il treno delle 6:30 è in ritardo di {{states.sensor.ritardo_612.state}} minuti , ora si trova a {{states.sensor.where_612.state}} '

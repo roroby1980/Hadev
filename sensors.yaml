@@ -1,0 +1,111 @@
+  #Cesano 6:30 --> 612
+  #Cesano 7:00 --> 1614 --> N00074
+  #Cesano 7:30 --> 618
+  #Cesano 7:35 --> 2718 --> N00085
+  #cesano 8:00 --> 1622
+
+  - platform: rest
+    name: tr630
+    json_attributes:
+      - ritardo
+      - stazioneUltimoRilevamento
+      - compOraUltimoRilevamento
+    resource: "http://www.viaggiatreno.it/viaggiatrenonew/resteasy/viaggiatreno/andamentoTreno/N00079/612"
+    value_template: 'Treno 6:30'
+    scan_interval: 30
+    
+  - platform: rest
+    name: tr700
+    json_attributes:
+      - ritardo
+      - stazioneUltimoRilevamento
+      - compOraUltimoRilevamento
+    resource: "http://www.viaggiatreno.it/viaggiatrenonew/resteasy/viaggiatreno/andamentoTreno/N00074/1614"
+    value_template: 'Treno 7:00'
+    scan_interval: 30
+
+  - platform: rest
+    name: tr730
+    json_attributes:
+      - ritardo
+      - stazioneUltimoRilevamento
+      - compOraUltimoRilevamento
+    resource: "http://www.viaggiatreno.it/viaggiatrenonew/resteasy/viaggiatreno/andamentoTreno/N00079/618"
+    value_template: 'Treno 7:30'
+    scan_interval: 30
+
+  - platform: rest
+    name: tr735
+    json_attributes:
+      - ritardo
+      - stazioneUltimoRilevamento
+      - compOraUltimoRilevamento
+    resource: "http://www.viaggiatreno.it/viaggiatrenonew/resteasy/viaggiatreno/andamentoTreno/N00085/2718"
+    value_template: 'Treno 7:35'
+    scan_interval: 30  
+    
+  - platform: rest
+    name: tr800
+    json_attributes:
+      - ritardo
+      - stazioneUltimoRilevamento
+      - compOraUltimoRilevamento
+    resource: "http://www.viaggiatreno.it/viaggiatrenonew/resteasy/viaggiatreno/andamentoTreno/N00079/1622"
+    value_template: 'Treno 8:00'
+    scan_interval: 30
+    
+  - platform: template
+    sensors:
+      ritardo_800:
+        friendly_name: 'Ritardo 8:00'
+        value_template: '{{ states.sensor.tr800.attributes["ritardo"] }}'
+      where_800:
+        friendly_name: 'Staz. Ultimo Rilevamento 8:00'
+        value_template: '{{ states.sensor.tr800.attributes["stazioneUltimoRilevamento"] }}'
+      when_800:
+        friendly_name: 'Ora Ultimo Rilevamento 8:00'
+        value_template: '{{ states.sensor.tr800.attributes["compOraUltimoRilevamento"] }}'
+      ritardo_730:
+        friendly_name: 'Ritardo 7:30'
+        value_template: '{{ states.sensor.tr730.attributes["ritardo"] }}'
+      where_730:
+        friendly_name: 'Staz. Ultimo Rilevamento 7:30'
+        value_template: '{{ states.sensor.tr730.attributes["stazioneUltimoRilevamento"] }}'
+      when_730:
+        friendly_name: 'Ora Ultimo Rilevamento 7:30'
+        value_template: '{{ states.sensor.tr730.attributes["compOraUltimoRilevamento"] }}'
+      ritardo_700:
+        friendly_name: 'Ritardo 7:00'
+        value_template: '{{ states.sensor.tr700.attributes["ritardo"] }}'
+      where_700:
+        friendly_name: 'Staz. Ultimo Rilevamento 7:00'
+        value_template: '{{ states.sensor.tr700.attributes["stazioneUltimoRilevamento"] }}'
+      when_700:
+        friendly_name: 'Ora Ultimo Rilevamento 7:00'
+        value_template: '{{ states.sensor.tr700.attributes["compOraUltimoRilevamento"] }}'
+      ritardo_630:
+        friendly_name: 'Ritardo 6:30'
+        value_template: '{{ states.sensor.tr630.attributes["ritardo"] }}'
+      where_630:
+        friendly_name: 'Staz. Ultimo Rilevamento 6:30'
+        value_template: '{{ states.sensor.tr630.attributes["stazioneUltimoRilevamento"] }}'
+      when_630:
+        friendly_name: 'Ora Ultimo Rilevamento 6:30'
+        value_template: '{{ states.sensor.tr630.attributes["compOraUltimoRilevamento"] }}'
+      ritardo _735:
+        friendly_name: 'Ritardo 7:35'
+        value_template: '{{ states.sensor.tr735.attributes["ritardo"] }}'
+      where _735:
+        friendly_name: 'Staz. Ultimo Rilevamento 7:35'
+        value_template: '{{ states.sensor.tr735.attributes["stazioneUltimoRilevamento"] }}'
+      when _735:
+        friendly_name: 'Ora Ultimo Rilevamento 7:35'
+        value_template: '{{ states.sensor.tr735.attributes["compOraUltimoRilevamento"] }}'
+        
+ # Termometro Processore Raspberry
+  - platform: command_line
+    name: CPU Temperature
+    command: "cat /sys/class/thermal/thermal_zone0/temp"
+    unit_of_measurement: "°C"
+    scan_interval: 120
+    value_template: '{{ value | multiply(0.001) }}'

@@ -1,4 +1,3 @@
-
 # Configure a default setup of Home Assistant (frontend, api, etc)
 default_config:
 
@@ -11,11 +10,12 @@ http:
 # Text to speech
 tts:
   - platform: google_translate
- 
 
 group: !include groups.yaml
 automation: !include automations.yaml
 script: !include scripts.yaml
+sensor: !include sensors.yaml
+zone: !include zone.yaml
 
 yeelight:
   devices:
@@ -35,125 +35,3 @@ camera:
     ffmpeg_arguments: '-vf scale=800:450'
     
 api:
-
-  
-  
-  #Cesano 6:30 --> 612
-  #Cesano 7:00 --> 1614 --> N00074
-  #Cesano 7:30 --> 618
-  #Cesano 7:35 --> 2718 --> N00085
-  #cesano 8:00 --> 1622
-
-  
-
-   
-sensor:
-  - platform: rest
-    name: train612
-    json_attributes:
-      - ritardo
-      - stazioneUltimoRilevamento
-      - compOraUltimoRilevamento
-    resource: "http://www.viaggiatreno.it/viaggiatrenonew/resteasy/viaggiatreno/andamentoTreno/N00079/612"
-    value_template: 'TRAIN612'
-    scan_interval: 30
-    
-  - platform: rest
-    name: train1614
-    json_attributes:
-      - ritardo
-      - stazioneUltimoRilevamento
-      - compOraUltimoRilevamento
-    resource: "http://www.viaggiatreno.it/viaggiatrenonew/resteasy/viaggiatreno/andamentoTreno/N00074/1614"
-    value_template: 'TRAIN1614'
-    scan_interval: 30
-
-  - platform: rest
-    name: train1614
-    json_attributes:
-      - ritardo
-      - stazioneUltimoRilevamento
-      - compOraUltimoRilevamento
-    resource: "http://www.viaggiatreno.it/viaggiatrenonew/resteasy/viaggiatreno/andamentoTreno/N00085/2718"
-    value_template: 'TRAIN1614'
-    scan_interval: 30
-  
-  - platform: rest
-    name: train618
-    json_attributes:
-      - ritardo
-      - stazioneUltimoRilevamento
-      - compOraUltimoRilevamento
-    resource: "http://www.viaggiatreno.it/viaggiatrenonew/resteasy/viaggiatreno/andamentoTreno/N00079/618"
-    value_template: 'TRAIN618'
-    scan_interval: 30
-  
-  - platform: rest
-    name: train1622
-    json_attributes:
-      - ritardo
-      - stazioneUltimoRilevamento
-      - compOraUltimoRilevamento
-    resource: "http://www.viaggiatreno.it/viaggiatrenonew/resteasy/viaggiatreno/andamentoTreno/N00079/1622"
-    value_template: 'TRAIN1622'
-    scan_interval: 30
-    
-  - platform: template
-    sensors:
-      ritardo_1622:
-        friendly_name: 'Ritardo_800'
-        value_template: '{{ states.sensor.train1622.attributes["ritardo"] }}'
-      where_1622:
-        friendly_name: 'Staz. Ultimo Rilevamento_800'
-        value_template: '{{ states.sensor.train1622.attributes["stazioneUltimoRilevamento"] }}'
-      when_1622:
-        friendly_name: 'Ora Ultimo Rilevamento_800'
-        value_template: '{{ states.sensor.train1622.attributes["compOraUltimoRilevamento"] }}'
-      ritardo_618:
-        friendly_name: 'Ritardo_730'
-        value_template: '{{ states.sensor.train618.attributes["ritardo"] }}'
-      where_618:
-        friendly_name: 'Staz. Ultimo Rilevamento_730'
-        value_template: '{{ states.sensor.train618.attributes["stazioneUltimoRilevamento"] }}'
-      when_618:
-        friendly_name: 'Ora Ultimo Rilevamento_730'
-        value_template: '{{ states.sensor.train618.attributes["compOraUltimoRilevamento"] }}'
-      ritardo_1614:
-        friendly_name: 'Ritardo_700'
-        value_template: '{{ states.sensor.train1614.attributes["ritardo"] }}'
-      where_1614:
-        friendly_name: 'Staz. Ultimo Rilevamento_700'
-        value_template: '{{ states.sensor.train1614.attributes["stazioneUltimoRilevamento"] }}'
-      when_1614:
-        friendly_name: 'Ora Ultimo Rilevamento_700'
-        value_template: '{{ states.sensor.train1614.attributes["compOraUltimoRilevamento"] }}'
-      ritardo_612:
-        friendly_name: 'Ritardo_630'
-        value_template: '{{ states.sensor.train612.attributes["ritardo"] }}'
-      where_612:
-        friendly_name: 'Staz. Ultimo Rilevamento_630'
-        value_template: '{{ states.sensor.train612.attributes["stazioneUltimoRilevamento"] }}'
-      when_612:
-        friendly_name: 'Ora Ultimo Rilevamento_630'
-        value_template: '{{ states.sensor.train612.attributes["compOraUltimoRilevamento"] }}'
-      ritardo_2718:
-        friendly_name: 'Ritardo_735'
-        value_template: '{{ states.sensor.train2718.attributes["ritardo"] }}'
-      where_2718:
-        friendly_name: 'Staz. Ultimo Rilevamento_735'
-        value_template: '{{ states.sensor.train2718.attributes["stazioneUltimoRilevamento"] }}'
-      when_2718:
-        friendly_name: 'Ora Ultimo Rilevamento_735'
-        value_template: '{{ states.sensor.train2718.attributes["compOraUltimoRilevamento"] }}'
-        
- # Termometro Processore Raspberry
-  - platform: command_line
-    name: CPU Temperature
-    command: "cat /sys/class/thermal/thermal_zone0/temp"
-    unit_of_measurement: "°C"
-    scan_interval: 120
-    value_template: '{{ value | multiply(0.001) }}'
-
-zone: !include zone.yaml
-
-      

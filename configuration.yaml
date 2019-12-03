@@ -32,7 +32,10 @@ api:
   #Cesano 6:30 --> 612
   #Cesano 7:00 --> 1614 --> N00074
   #Cesano 7:30 --> 618
+  #Cesano 7:35 --> 2718 --> N00085
   #cesano 8:00 --> 1622
+
+  
 
    
 sensor:
@@ -44,7 +47,7 @@ sensor:
       - compOraUltimoRilevamento
     resource: "http://www.viaggiatreno.it/viaggiatrenonew/resteasy/viaggiatreno/andamentoTreno/N00079/612"
     value_template: 'TRAIN612'
-    scan_interval: 10
+    scan_interval: 30
     
   - platform: rest
     name: train1614
@@ -54,7 +57,17 @@ sensor:
       - compOraUltimoRilevamento
     resource: "http://www.viaggiatreno.it/viaggiatrenonew/resteasy/viaggiatreno/andamentoTreno/N00074/1614"
     value_template: 'TRAIN1614'
-    scan_interval: 10
+    scan_interval: 30
+
+  - platform: rest
+    name: train1614
+    json_attributes:
+      - ritardo
+      - stazioneUltimoRilevamento
+      - compOraUltimoRilevamento
+    resource: "http://www.viaggiatreno.it/viaggiatrenonew/resteasy/viaggiatreno/andamentoTreno/N00085/2718"
+    value_template: 'TRAIN1614'
+    scan_interval: 30
   
   - platform: rest
     name: train618
@@ -64,7 +77,7 @@ sensor:
       - compOraUltimoRilevamento
     resource: "http://www.viaggiatreno.it/viaggiatrenonew/resteasy/viaggiatreno/andamentoTreno/N00079/618"
     value_template: 'TRAIN618'
-    scan_interval: 10
+    scan_interval: 30
   
   - platform: rest
     name: train1622
@@ -74,7 +87,7 @@ sensor:
       - compOraUltimoRilevamento
     resource: "http://www.viaggiatreno.it/viaggiatrenonew/resteasy/viaggiatreno/andamentoTreno/N00079/1622"
     value_template: 'TRAIN1622'
-    scan_interval: 10
+    scan_interval: 30
     
   - platform: template
     sensors:
@@ -114,6 +127,15 @@ sensor:
       when_612:
         friendly_name: 'Ora Ultimo Rilevamento_630'
         value_template: '{{ states.sensor.train612.attributes["compOraUltimoRilevamento"] }}'
+      ritardo_2718:
+        friendly_name: 'Ritardo_735'
+        value_template: '{{ states.sensor.train2718.attributes["ritardo"] }}'
+      where_2718:
+        friendly_name: 'Staz. Ultimo Rilevamento_735'
+        value_template: '{{ states.sensor.train2718.attributes["stazioneUltimoRilevamento"] }}'
+      when_2718:
+        friendly_name: 'Ora Ultimo Rilevamento_735'
+        value_template: '{{ states.sensor.train2718.attributes["compOraUltimoRilevamento"] }}'
         
  # Termometro Processore Raspberry
   - platform: command_line

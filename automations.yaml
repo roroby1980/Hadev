@@ -1,4 +1,4 @@
-- id: '1'
+- id: 'phone_notification_home'
   alias: Notifica ingressi e uscite
   trigger:
     platform: state
@@ -11,12 +11,37 @@
     data_template:
       title: Entrance/Exits
       message: >
-        '{% if trigger.to_state.state == 'home' %} 
+        {% if trigger.to_state.state == 'home' %}
         Rilevato ingresso in casa da parte di {{ trigger.from_state.attributes.friendly_name }}
-         {% elif (trigger.to_state.state == 'away' or trigger.to_state.state == 'not_home') 
-         and trigger.from_state.state == 'home' %} 
-         Rilevata uscita da parte di {{ trigger.from_state.attributes.friendly_name }} {% endif %}'
-      
+        {% elif (trigger.to_state.state == 'away' or trigger.to_state.state == 'not_home') and trigger.from_state.state == 'home' %}
+        Rilevata uscita da parte di {{ trigger.from_state.attributes.friendly_name }}
+        {% endif %}
+
+- id: 'phone_notification_work'
+  alias: Notifica uscita work
+  trigger:
+    platform: state
+    entity_id: device_tracker.iphone_di_roberto
+  condition:
+     - condition: template
+       value_template: '{{ trigger.to_state.state != trigger.from_state.state }}'
+     - condition: time
+       after: '14:00:00'
+       weekday:
+         - mon
+         - tue
+         - wed
+         - thu
+         - fri
+  action:
+    service: notify.mobile_app_iphone_di_roberto
+    data_template:
+      title: Exit from Work
+      message: >
+        {% if (trigger.to_state.state == 'away' or trigger.to_state.state == 'not_home') and trigger.from_state.state == 'work' %}
+        Rilevata uscita da {{ trigger.from_state.state }} di {{ trigger.from_state.attributes.friendly_name }}
+        {% endif %}
+
   #Cesano 6:30 --> 612
   #Cesano 7:00 --> 1614 --> N00074
   #Cesano 7:30 --> 618

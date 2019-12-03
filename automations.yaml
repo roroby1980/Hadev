@@ -51,7 +51,7 @@
   alias: Notifica Treno
   trigger:
   - above: '2'
-    entity_id: sensor.ritardo_1622
+    entity_id: sensor.ritardo_800
     platform: numeric_state
   condition:
     condition: time
@@ -65,15 +65,15 @@
       - fri
   action:
   - data_template:
-      message: 'h {{states.sensor.when_1622.state}} - staz {{states.sensor.where_1622.state}} '
-      title: 'tr 8:00 + {{states.sensor.ritardo_1622.state}} min'
+      message: 'h {{states.sensor.when_800.state}} - staz {{states.sensor.where_800.state}} '
+      title: 'tr 8:00 + {{states.sensor.ritardo_800.state}} min'
     service: notify.mobile_app_iphone_di_roberto
           
 - id: '4'
   alias: Notifica Treno
   trigger:
   - above: '2'
-    entity_id: sensor.ritardo_1614
+    entity_id: sensor.ritardo_700
     platform: numeric_state
   condition:
     condition: time
@@ -87,15 +87,15 @@
       - fri
   action:
   - data_template:
-      message: 'Il treno delle 7:00 è in ritardo di {{states.sensor.ritardo_1614.state}} minuti , ora si trova a {{states.sensor.where_1614.state}} '
-      title: Treno Cesano Maderno 7:00
+      message: 'h {{states.sensor.when_700.state}} - staz {{states.sensor.where_700.state}} '
+      title: 'tr 7:00 + {{states.sensor.ritardo_700.state}} min'
     service: notify.mobile_app_iphone_di_roberto
     
 - id: '5'
   alias: Notifica Treno
   trigger:
   - above: '2'
-    entity_id: sensor.ritardo_618
+    entity_id: sensor.ritardo_730
     platform: numeric_state
   condition:
     condition: time
@@ -109,14 +109,15 @@
       - fri
   action:
   - data_template:
-      message: 'Il treno delle 7:30 è in ritardo di {{states.sensor.ritardo_618.state}} minuti , ora si trova a {{states.sensor.where_618.state}} '
-      title: Treno Cesano Maderno 7:30
+      message: 'h {{states.sensor.when_730.state}} - staz {{states.sensor.where_730.state}} '
+      title: 'tr 7:30 + {{states.sensor.ritardo_730.state}} min'
     service: notify.mobile_app_iphone_di_roberto
+
 - id: '6'
   alias: Notifica Treno
   trigger:
   - above: '2'
-    entity_id: sensor.ritardo_612
+    entity_id: sensor.ritardo_630
     platform: numeric_state
   condition:
     condition: time
@@ -130,8 +131,8 @@
       - fri
   action:
   - data_template:
-      message: 'Il treno delle 6:30 è in ritardo di {{states.sensor.ritardo_612.state}} minuti , ora si trova a {{states.sensor.where_612.state}} '
-      title: Treno Cesano Maderno 6:30
+      message: 'h {{states.sensor.when_630.state}} - staz {{states.sensor.where_630.state}} '
+      title: 'tr 6:30 + {{states.sensor.ritardo_630.state}} min'
     service: notify.mobile_app_iphone_di_roberto
 
 

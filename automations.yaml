@@ -48,7 +48,7 @@
   #cesano 8:00 --> 1622
         
 - id: '2'
-  alias: Notifica Treno
+  alias: Notifica Treno 8:00
   trigger:
   - above: '2'
     entity_id: sensor.ritardo_800
@@ -70,7 +70,7 @@
     service: notify.mobile_app_iphone_di_roberto
           
 - id: '4'
-  alias: Notifica Treno
+  alias: Notifica Treno 7:00
   trigger:
   - above: '2'
     entity_id: sensor.ritardo_700
@@ -92,7 +92,7 @@
     service: notify.mobile_app_iphone_di_roberto
     
 - id: '5'
-  alias: Notifica Treno
+  alias: Notifica Treno 7:30
   trigger:
   - above: '2'
     entity_id: sensor.ritardo_730
@@ -114,7 +114,7 @@
     service: notify.mobile_app_iphone_di_roberto
 
 - id: '6'
-  alias: Notifica Treno
+  alias: Notifica Treno 7:35
   trigger:
   - above: '2'
     entity_id: sensor.ritardo_630

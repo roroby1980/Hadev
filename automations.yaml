@@ -11,8 +11,10 @@
     data_template:
       title: Entrance/Exits
       message: >
-        '{% if trigger.to_state.state == ''home'' %} Rilevato ingresso in casa da parte di {{ trigger.from_state.attributes.friendly_name }}
-         {% elif (trigger.to_state.state == ''away'' or trigger.to_state.state == ''not_home'') and trigger.from_state.state == ''home'' %} 
+        '{% if trigger.to_state.state == 'home' %} 
+        Rilevato ingresso in casa da parte di {{ trigger.from_state.attributes.friendly_name }}
+         {% elif (trigger.to_state.state == 'away' or trigger.to_state.state == 'not_home') 
+         and trigger.from_state.state == 'home' %} 
          Rilevata uscita da parte di {{ trigger.from_state.attributes.friendly_name }} {% endif %}'
       
   #Cesano 6:30 --> 612

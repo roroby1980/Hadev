@@ -11,6 +11,7 @@ http:
 # Text to speech
 tts:
   - platform: google_translate
+ 
 
 group: !include groups.yaml
 automation: !include automations.yaml
@@ -24,6 +25,14 @@ yeelight:
       name: bagno
     192.168.1.66:
       name: Livingroom
+  
+camera:
+  - platform: yi
+    name: Camera
+    host: '192.168.1.67'
+    password: !secret camera_pwd    
+    path: /tmp/sd/record
+    ffmpeg_arguments: '-vf scale=800:450'
     
 api:
 

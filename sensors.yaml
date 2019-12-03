@@ -43,7 +43,7 @@
     resource: "http://www.viaggiatreno.it/viaggiatrenonew/resteasy/viaggiatreno/andamentoTreno/N00085/2718"
     value_template: 'Treno 7:35'
     scan_interval: 30  
-    
+
   - platform: rest
     name: tr800
     json_attributes:
@@ -92,13 +92,13 @@
       when_630:
         friendly_name: 'Ora Ultimo Rilevamento 6:30'
         value_template: '{{ states.sensor.tr630.attributes["compOraUltimoRilevamento"] }}'
-      ritardo _735:
+      ritardo_735:
         friendly_name: 'Ritardo 7:35'
         value_template: '{{ states.sensor.tr735.attributes["ritardo"] }}'
-      where _735:
+      where_735:
         friendly_name: 'Staz. Ultimo Rilevamento 7:35'
         value_template: '{{ states.sensor.tr735.attributes["stazioneUltimoRilevamento"] }}'
-      when _735:
+      when_735:
         friendly_name: 'Ora Ultimo Rilevamento 7:35'
         value_template: '{{ states.sensor.tr735.attributes["compOraUltimoRilevamento"] }}'
         

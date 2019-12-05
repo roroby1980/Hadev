@@ -60,46 +60,46 @@
         friendly_name: 'Ritardo 8:00'
         value_template: '{{ states.sensor.tr800.attributes["ritardo"] }}'
       where_800:
-        friendly_name: 'Staz. Ultimo Rilevamento 8:00'
+        friendly_name: 'Stazione 8:00'
         value_template: '{{ states.sensor.tr800.attributes["stazioneUltimoRilevamento"] }}'
       when_800:
-        friendly_name: 'Ora Ultimo Rilevamento 8:00'
+        friendly_name: 'Last update Time 8:00'
         value_template: '{{ states.sensor.tr800.attributes["compOraUltimoRilevamento"] }}'
       ritardo_730:
         friendly_name: 'Ritardo 7:30'
         value_template: '{{ states.sensor.tr730.attributes["ritardo"] }}'
       where_730:
-        friendly_name: 'Staz. Ultimo Rilevamento 7:30'
+        friendly_name: 'Stazione 7:30'
         value_template: '{{ states.sensor.tr730.attributes["stazioneUltimoRilevamento"] }}'
       when_730:
-        friendly_name: 'Ora Ultimo Rilevamento 7:30'
+        friendly_name: 'Last update Time 7:30'
         value_template: '{{ states.sensor.tr730.attributes["compOraUltimoRilevamento"] }}'
       ritardo_700:
         friendly_name: 'Ritardo 7:00'
         value_template: '{{ states.sensor.tr700.attributes["ritardo"] }}'
       where_700:
-        friendly_name: 'Staz. Ultimo Rilevamento 7:00'
+        friendly_name: 'Stazione 7:00'
         value_template: '{{ states.sensor.tr700.attributes["stazioneUltimoRilevamento"] }}'
       when_700:
-        friendly_name: 'Ora Ultimo Rilevamento 7:00'
+        friendly_name: 'Last update Time 7:00'
         value_template: '{{ states.sensor.tr700.attributes["compOraUltimoRilevamento"] }}'
       ritardo_630:
         friendly_name: 'Ritardo 6:30'
         value_template: '{{ states.sensor.tr630.attributes["ritardo"] }}'
       where_630:
-        friendly_name: 'Staz. Ultimo Rilevamento 6:30'
+        friendly_name: 'Stazione 6:30'
         value_template: '{{ states.sensor.tr630.attributes["stazioneUltimoRilevamento"] }}'
       when_630:
-        friendly_name: 'Ora Ultimo Rilevamento 6:30'
+        friendly_name: 'Last update Time 6:30'
         value_template: '{{ states.sensor.tr630.attributes["compOraUltimoRilevamento"] }}'
       ritardo_735:
         friendly_name: 'Ritardo 7:35'
         value_template: '{{ states.sensor.tr735.attributes["ritardo"] }}'
       where_735:
-        friendly_name: 'Staz. Ultimo Rilevamento 7:35'
+        friendly_name: 'Stazione 7:35'
         value_template: '{{ states.sensor.tr735.attributes["stazioneUltimoRilevamento"] }}'
       when_735:
-        friendly_name: 'Ora Ultimo Rilevamento 7:35'
+        friendly_name: 'Last update Time 7:35'
         value_template: '{{ states.sensor.tr735.attributes["compOraUltimoRilevamento"] }}'
         
  # Termometro Processore Raspberry

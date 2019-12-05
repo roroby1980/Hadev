@@ -31,7 +31,7 @@ camera:
     name: Camera
     host: '192.168.1.67'
     password: !secret camera_pwd    
-    path: /tmp/sd/record
+    path: /tmp/sd/record/
     ffmpeg_arguments: '-vf scale=800:450'
     
 api:

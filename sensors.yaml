@@ -1,3 +1,7 @@
+  - platform: mqtt
+    state_topic: "yicam/motion"
+    name: "Motion camera"
+  
   #Cesano 6:30 --> 612
   #Cesano 7:00 --> 1614 --> N00074
   #Cesano 7:30 --> 618

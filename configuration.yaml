@@ -40,7 +40,32 @@ camera:
     
 api:
 
+hacs:
+  token: !secret token_hacs
 
+recorder:
+  exclude:
+    entities:
+     - sensor.tr800
+     - sensor.ritardo_800
+     - sensor.where_800
+     - sensor.when_800
+     - sensor.tr735
+     - sensor.ritardo_735
+     - sensor.where_735
+     - sensor.when_735
+     - sensor.tr730
+     - sensor.ritardo_730
+     - sensor.where_730
+     - sensor.when_730
+     - sensor.tr700
+     - sensor.ritardo_700
+     - sensor.where_700
+     - sensor.when_700
+     - sensor.tr630
+     - sensor.ritardo_630
+     - sensor.where_630
+     - sensor.when_630
 
 history:
   exclude:

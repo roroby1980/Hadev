@@ -14,7 +14,7 @@
       - ritardo
       - stazioneUltimoRilevamento
       - compOraUltimoRilevamento
-    resource: "http://www.viaggiatreno.it/viaggiatrenonew/resteasy/viaggiatreno/andamentoTreno/N00079/612"
+    resource: "http://www.viaggiatreno.it/viaggiatrenonew/resteasy/viaggiatreno/andamentoTreno/S01101/612"
     value_template: 'Treno 6:30'
     scan_interval: 30
     
@@ -24,7 +24,8 @@
       - ritardo
       - stazioneUltimoRilevamento
       - compOraUltimoRilevamento
-    resource: "http://www.viaggiatreno.it/viaggiatrenonew/resteasy/viaggiatreno/andamentoTreno/N00074/1614"
+      #- fermate[fermate.lenght-1].stazione
+    resource: "http://www.viaggiatreno.it/viaggiatrenonew/resteasy/viaggiatreno/andamentoTreno/S01096/1614"
     value_template: 'Treno 7:00'
     scan_interval: 30
 
@@ -34,7 +35,7 @@
       - ritardo
       - stazioneUltimoRilevamento
       - compOraUltimoRilevamento
-    resource: "http://www.viaggiatreno.it/viaggiatrenonew/resteasy/viaggiatreno/andamentoTreno/N00079/618"
+    resource: "http://www.viaggiatreno.it/viaggiatrenonew/resteasy/viaggiatreno/andamentoTreno/S01101/618"
     value_template: 'Treno 7:30'
     scan_interval: 30
 
@@ -44,7 +45,7 @@
       - ritardo
       - stazioneUltimoRilevamento
       - compOraUltimoRilevamento
-    resource: "http://www.viaggiatreno.it/viaggiatrenonew/resteasy/viaggiatreno/andamentoTreno/N00085/2718"
+    resource: "http://www.viaggiatreno.it/viaggiatrenonew/resteasy/viaggiatreno/andamentoTreno/S01316/2718"
     value_template: 'Treno 7:35'
     scan_interval: 30  
 
@@ -54,7 +55,7 @@
       - ritardo
       - stazioneUltimoRilevamento
       - compOraUltimoRilevamento
-    resource: "http://www.viaggiatreno.it/viaggiatrenonew/resteasy/viaggiatreno/andamentoTreno/N00079/1622"
+    resource: "http://www.viaggiatreno.it/viaggiatrenonew/resteasy/viaggiatreno/andamentoTreno/S01101/1622"
     value_template: 'Treno 8:00'
     scan_interval: 30
     

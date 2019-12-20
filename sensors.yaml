@@ -111,7 +111,7 @@
                          + states("est_pow_entrance") |int
                          + states("est_pow_livingroom_l") |int
                          + states("est_pow_livingroom_lights") |int
-                         + states("est_pow_livingroom_led_lights") |int }}
+                         + states("est_pow_livingroom_led_lights") |int }}'
 
   - platform: integration
     source: sensor.current_power

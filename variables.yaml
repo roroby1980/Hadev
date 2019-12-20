@@ -1,0 +1,15 @@
+ultimo_movimento:
+  initial_value: 'Unknown'
+  restore: true
+  icon: mdi:map-marker
+  friendly_name: "Ultimo Movimento"
+  
+ultimo_aggiornamento_tami_phone:
+  initial_value: 'Unknown'
+  restore: true
+  icon: mdi:map-marker
+
+ultimo_aggiornamento_roby_phone:
+  initial_value: 'Unknown'
+  restore: true
+  icon: mdi:map-marker

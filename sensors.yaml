@@ -1,8 +1,21 @@
+  - platform: mqtt
+    name: "camera soggiorno"
+    state_topic: 'yicam/motion'
+
+ 
+ 
   #Cesano 6:30 --> 612
   #Cesano 7:00 --> 1614 --> N00074
   #Cesano 7:30 --> 618
   #Cesano 7:35 --> 2718 --> N00085
   #cesano 8:00 --> 1622
+  
+  - platform: template
+    sensors:
+      time_last_motion:
+        friendly_name: Ultimo Movimento
+        icon_template: mdi:map-marker
+        value_template:  "{{states.variable.ultimo_movimento.state}} {{as_timestamp(states.variable.ultimo_movimento.last_changed) | timestamp_custom('%H:%M')}}"
 
   - platform: rest
     name: tr630
@@ -102,6 +115,7 @@
         friendly_name: 'Last update Time 7:35'
         value_template: '{{ states.sensor.tr735.attributes["compOraUltimoRilevamento"] }}'
         
+        
  # Termometro Processore Raspberry
   - platform: command_line
     name: CPU Temperature
@@ -109,3 +123,163 @@
     unit_of_measurement: "°C"
     scan_interval: 120
     value_template: '{{ value | multiply(0.001) }}'
+
+  - platform: history_stats
+    name: Led ON today
+    entity_id: switch.sonoff
+    state: 'on'
+    type: time
+    start: '{{ now().replace(hour=0).replace(minute=0).replace(second=0) }}'
+    end: '{{ now() }}'
+    
+  - platform: history_stats
+    name: Led ON yesterday
+    entity_id: switch.sonoff
+    state: 'on'
+    type: time 
+    end: '{{ now().replace(hour=0).replace(minute=0).replace(second=0) }}'
+    duration:
+       hours: 24
+       
+  - platform: history_stats
+    name: Led ON this week
+    entity_id: switch.sonoff
+    state: 'on'
+    type: time 
+    start: '{{ as_timestamp( now().replace(hour=0).replace(minute=0).replace(second=0) ) - now().weekday() * 86400 }}'
+    end: '{{ now() }}'
+    
+    #####
+    
+  - platform: history_stats
+    name: Entrance ON today
+    entity_id: light.entrance
+    state: 'on'
+    type: time
+    start: '{{ now().replace(hour=0).replace(minute=0).replace(second=0) }}'
+    end: '{{ now() }}'
+    
+  - platform: history_stats
+    name: Entrance ON yesterday
+    entity_id: light.entrance
+    state: 'on'
+    type: time 
+    end: '{{ now().replace(hour=0).replace(minute=0).replace(second=0) }}'
+    duration:
+       hours: 24
+       
+  - platform: history_stats
+    name: Entrance ON this week
+    entity_id: light.entrance
+    state: 'on'
+    type: time 
+    start: '{{ as_timestamp( now().replace(hour=0).replace(minute=0).replace(second=0) ) - now().weekday() * 86400 }}'
+    end: '{{ now() }}'
+    
+    #####
+    
+  - platform: history_stats
+    name: Work today
+    entity_id: person.roby
+    state: 'Work'
+    type: time
+    start: '{{ now().replace(hour=0).replace(minute=0).replace(second=0) }}'
+    end: '{{ now() }}'
+
+  - platform: history_stats
+    name: work yesterday
+    entity_id: person.roby
+    state: 'Work'
+    type: time 
+    end: '{{ now().replace(hour=0).replace(minute=0).replace(second=0) }}'
+    duration:
+       hours: 24
+       
+  - platform: history_stats
+    name: work this week
+    entity_id: person.roby
+    state: 'Work'
+    type: time 
+    start: '{{ as_timestamp( now().replace(hour=0).replace(minute=0).replace(second=0) ) - now().weekday() * 86400 }}'
+    end: '{{ now() }}'
+    
+        #####
+    
+  - platform: history_stats
+    name: roby home today
+    entity_id: person.roby
+    state: 'home'
+    type: time
+    start: '{{ now().replace(hour=0).replace(minute=0).replace(second=0) }}'
+    end: '{{ now() }}'
+
+  - platform: history_stats
+    name: roby home yesterday
+    entity_id: person.roby
+    state: 'home'
+    type: time 
+    end: '{{ now().replace(hour=0).replace(minute=0).replace(second=0) }}'
+    duration:
+       hours: 24
+       
+  - platform: history_stats
+    name: roby home  this week
+    entity_id: person.roby
+    state: 'home'
+    type: time 
+    start: '{{ as_timestamp( now().replace(hour=0).replace(minute=0).replace(second=0) ) - now().weekday() * 86400 }}'
+    end: '{{ now() }}'
+    
+        #####
+    
+  - platform: history_stats
+    name: tami home today
+    entity_id: person.tami
+    state: 'home'
+    type: time
+    start: '{{ now().replace(hour=0).replace(minute=0).replace(second=0) }}'
+    end: '{{ now() }}'
+
+  - platform: history_stats
+    name: tami home yesterday
+    entity_id: person.tami
+    state: 'home'
+    type: time 
+    end: '{{ now().replace(hour=0).replace(minute=0).replace(second=0) }}'
+    duration:
+       hours: 24
+       
+  - platform: history_stats
+    name: tami home  this week
+    entity_id: person.tami
+    state: 'home'
+    type: time 
+    start: '{{ as_timestamp( now().replace(hour=0).replace(minute=0).replace(second=0) ) - now().weekday() * 86400 }}'
+    end: '{{ now() }}'
+
+    #####
+
+  - platform: history_stats
+    name: lights ON today
+    entity_id: switch.tasmota
+    state: 'on'
+    type: time
+    start: '{{ now().replace(hour=0).replace(minute=0).replace(second=0) }}'
+    end: '{{ now() }}'
+    
+  - platform: history_stats
+    name: lights ON yesterday
+    entity_id: switch.tasmota
+    state: 'on'
+    type: time 
+    end: '{{ now().replace(hour=0).replace(minute=0).replace(second=0) }}'
+    duration:
+       hours: 24
+       
+  - platform: history_stats
+    name: lights ON this week
+    entity_id: switch.tasmota
+    state: 'on'
+    type: time 
+    start: '{{ as_timestamp( now().replace(hour=0).replace(minute=0).replace(second=0) ) - now().weekday() * 86400 }}'
+    end: '{{ now() }}'

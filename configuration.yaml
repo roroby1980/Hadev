@@ -14,12 +14,37 @@ http:
 # Text to speech
 tts:
   - platform: google_translate
+  
+system_health:
+
+webhook:
+
+zigbee2mqtt_networkmap:
+   #topic: your topic (optional, default zigbee2mqtt)
+panel_iframe:
+  networkmap:
+    title: 'Zigbee Map'
+    url: '/local/community/zigbee2mqtt_networkmap/map.html'
+    icon: 'mdi:graphql'
 
 group: !include groups.yaml
 automation: !include automations.yaml
 script: !include scripts.yaml
 sensor: !include sensors.yaml
 zone: !include zone.yaml
+var: !include variables.yaml
+
+light:
+  - platform: mqtt
+    name: "vintage led"
+    state_topic: 'sonoff/status'
+    command_topic: 'sonoff/switch'
+    availability_topic: "sonoff/available"
+    payload_on: "ON"
+    payload_off: "OFF"
+    payload_available: "online"
+    payload_not_available: "offline"
+
 
 yeelight:
   devices:
@@ -32,7 +57,7 @@ yeelight:
   
 camera:
   - platform: yi
-    name: Camera
+    name: CameraLiving
     host: '192.168.1.67'
     password: !secret camera_pwd    
     path: /tmp/sd/record/
@@ -42,12 +67,11 @@ api:
 
 hacs:
   token: !secret token_hacs
+  theme: true
 
-alexa_media:
-  accounts:
-    - email: !secret amazon_user
-      password: !secret amazon_password
-      url: amazon.com
+frontend:
+  themes: !include_dir_merge_named themes
+
 
 recorder:
   exclude:

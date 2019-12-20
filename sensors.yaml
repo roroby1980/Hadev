@@ -101,7 +101,7 @@
         unit_of_measurement: 'W'
         value_template: '{% if states("switch.tasmota") == "on" %} 15 {% elif  states("switch.tasmota") == "off" %} 0 {% endif %}'
       current_power:
-        riendly_name: "Power light livingroom LED"
+        friendly_name: "Power light livingroom LED"
         unit_of_measurement: 'W'
         value_template: ' {{ states("est_pow_l_cucina_2") |int
                          + states("est_pow_l_bagno") |int

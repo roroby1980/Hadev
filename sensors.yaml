@@ -95,11 +95,11 @@
       est_pow_livingroom_lights:
         friendly_name: "Power light livingroom lights"
         unit_of_measurement: 'W'
-        value_template: "{% if states("switch.sonoff") == 'on' %} 15 {% elif  states("switch.sonoff") == 'off' %} 0 {% endif %}"
+        value_template: '{% if states("switch.sonoff") == "on" %} 15 {% elif  states("switch.sonoff") == "off" %} 0 {% endif %}'
       est_pow_livingroom_led_lights:
         friendly_name: "Power light livingroom LED"
         unit_of_measurement: 'W'
-        value_template: "{% if states("switch.tasmota") == 'on' %} 15 {% elif  states("switch.tasmota") == 'off' %} 0 {% endif %}"
+        value_template: '{% if states("switch.tasmota") == "on" %} 15 {% elif  states("switch.tasmota") == "off" %} 0 {% endif %}'
       current_power:
         riendly_name: "Power light livingroom LED"
         unit_of_measurement: 'W'

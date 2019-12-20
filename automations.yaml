@@ -1,51 +1,43 @@
-- id: 'phone_notification_home'
+- id: phone_notification_home
   alias: Notifica ingressi e uscite
   trigger:
     platform: state
     entity_id: device_tracker.iphone_di_roberto, device_tracker.tamar_s_iphone
   condition:
-    condition: template
-    value_template: '{{ trigger.to_state.state != trigger.from_state.state }}'
+   - condition: template
+     value_template: '{{ trigger.to_state.state == ''home'' or  trigger.from_state.state == ''home'' }}'
+   - condition: template
+     value_template: '{{ trigger.to_state.state != trigger.from_state.state }}'
   action:
     service: notify.mobile_app_iphone_di_roberto
     data_template:
       title: Entrance/Exits
-      message: >
-        {% if trigger.to_state.state == 'home' %}
-        Rilevato ingresso in casa da parte di {{ trigger.from_state.attributes.friendly_name }}
-        {% elif (trigger.to_state.state == 'away' or trigger.to_state.state == 'not_home') and trigger.from_state.state == 'home' %}
-        Rilevata uscita da parte di {{ trigger.from_state.attributes.friendly_name }}
-        {% endif %}
+      message: '{% if trigger.to_state.state == ''home'' %} {{ now().strftime("%H:%M") }} 
+        - Rilevato ingresso in casa da parte di {{ trigger.from_state.attributes.friendly_name }}
+        {% elif  trigger.from_state.state == ''home'' %} {{ now().strftime("%H:%M") }} 
+        - Rilevata uscita da parte di {{ trigger.from_state.attributes.friendly_name }} {% endif %}'
 
-- id: 'phone_notification_work'
+
+- id: phone_notification_work
   alias: Notifica uscita work
   trigger:
     platform: state
     entity_id: device_tracker.iphone_di_roberto
+    from: Work
   condition:
-     - condition: template
-       value_template: '{{ trigger.to_state.state != trigger.from_state.state }}'
-     - condition: time
-       after: '14:00:00'
-       weekday:
-         - mon
-         - tue
-         - wed
-         - thu
-         - fri
+  - condition: time
+    after: '14:00:00'
+    weekday:
+    - mon
+    - tue
+    - wed
+    - thu
+    - fri
   action:
     service: notify.mobile_app_iphone_di_roberto
     data_template:
       title: Exit from Work
-      message: >
-        {% if (trigger.to_state.state == 'away' or trigger.to_state.state == 'not_home') and trigger.from_state.state == 'work' %}
-        Rilevata uscita da {{ trigger.from_state.state }} di {{ trigger.from_state.attributes.friendly_name }}
-        {% endif %}
-
-  #Cesano 6:30 --> 612
-  #Cesano 7:00 --> 1614 --> N00074
-  #Cesano 7:30 --> 618
-  #cesano 8:00 --> 1622
+      message: 'Rilevata uscita da {{ trigger.from_state.state }} di {{ trigger.from_state.attributes.friendly_name }} alle {{ now().strftime("%H:%M") }}  '
         
 - id: '2'
   alias: Notifica Treno 8:00
@@ -55,20 +47,19 @@
     platform: numeric_state
   condition:
     condition: time
-    after: '07:00:00'
-    before: '08:00:00'
+    after: 07:00:00
+    before: 08:00:00
     weekday:
-      - mon
-      - tue
-      - wed
-      - thu
-      - fri
+    - mon
+    - tue
+    - wed
+    - thu
+    - fri
   action:
   - data_template:
       message: 'h {{states.sensor.when_800.state}} - staz {{states.sensor.where_800.state}} '
-      title: 'tr 8:00 + {{states.sensor.ritardo_800.state}} min'
+      title: tr 8:00 + {{states.sensor.ritardo_800.state}} min
     service: notify.mobile_app_iphone_di_roberto
-          
 - id: '4'
   alias: Notifica Treno 7:00
   trigger:
@@ -77,20 +68,19 @@
     platform: numeric_state
   condition:
     condition: time
-    after: '06:00:00'
-    before: '07:00:00'
+    after: 06:00:00
+    before: 07:00:00
     weekday:
-      - mon
-      - tue
-      - wed
-      - thu
-      - fri
+    - mon
+    - tue
+    - wed
+    - thu
+    - fri
   action:
   - data_template:
       message: 'h {{states.sensor.when_700.state}} - staz {{states.sensor.where_700.state}} '
-      title: 'tr 7:00 + {{states.sensor.ritardo_700.state}} min'
+      title: tr 7:00 + {{states.sensor.ritardo_700.state}} min
     service: notify.mobile_app_iphone_di_roberto
-    
 - id: '5'
   alias: Notifica Treno 7:30
   trigger:
@@ -99,20 +89,19 @@
     platform: numeric_state
   condition:
     condition: time
-    after: '06:30:00'
-    before: '07:30:00'
+    after: 06:30:00
+    before: 07:30:00
     weekday:
-      - mon
-      - tue
-      - wed
-      - thu
-      - fri
+    - mon
+    - tue
+    - wed
+    - thu
+    - fri
   action:
   - data_template:
       message: 'h {{states.sensor.when_730.state}} - staz {{states.sensor.where_730.state}} '
-      title: 'tr 7:30 + {{states.sensor.ritardo_730.state}} min'
+      title: tr 7:30 + {{states.sensor.ritardo_730.state}} min
     service: notify.mobile_app_iphone_di_roberto
-
 - id: '6'
   alias: Notifica Treno 6:30
   trigger:
@@ -121,21 +110,20 @@
     platform: numeric_state
   condition:
     condition: time
-    after: '06:00:00'
-    before: '06:30:00'
+    after: 06:00:00
+    before: 06:30:00
     weekday:
-      - mon
-      - tue
-      - wed
-      - thu
-      - fri
+    - mon
+    - tue
+    - wed
+    - thu
+    - fri
   action:
   - data_template:
       message: 'h {{states.sensor.when_630.state}} - staz {{states.sensor.where_630.state}} '
-      title: 'tr 6:30 + {{states.sensor.ritardo_630.state}} min'
+      title: tr 6:30 + {{states.sensor.ritardo_630.state}} min
     service: notify.mobile_app_iphone_di_roberto
-
-- id: '6a'
+- id: 6a
   alias: Notifica Treno 7:35
   trigger:
   - above: '2'
@@ -143,21 +131,19 @@
     platform: numeric_state
   condition:
     condition: time
-    after: '06:00:00'
-    before: '07:40:00'
+    after: 06:00:00
+    before: 07:40:00
     weekday:
-      - mon
-      - tue
-      - wed
-      - thu
-      - fri
+    - mon
+    - tue
+    - wed
+    - thu
+    - fri
   action:
   - data_template:
       message: 'h {{states.sensor.when_735.state}} - staz {{states.sensor.where_735.state}} '
-      title: 'tr 7:35 + {{states.sensor.ritardo_735.state}} min'
+      title: tr 7:35 + {{states.sensor.ritardo_735.state}} min
     service: notify.mobile_app_iphone_di_roberto
-
-
 - id: '7'
   alias: raiseup bagno light with motion
   trigger:
@@ -166,7 +152,7 @@
     to: 'on'
   condition:
     condition: time
-    after: '07:00:00'
+    after: 07:00:00
     before: '19:00:00'
   action:
     service: light.turn_on
@@ -174,8 +160,7 @@
     data_template:
       transition: 10
       brightness: 255
-      
-- id: '7a'
+- id: 7a
   alias: raiseup bagno light with motion
   trigger:
     platform: state
@@ -190,7 +175,6 @@
     data_template:
       transition: 10
       brightness: 70
-      
 - id: '8'
   alias: raisedown bagno light with motion
   trigger:
@@ -201,7 +185,7 @@
       minutes: 5
   condition:
     condition: time
-    after: '07:00:00'
+    after: 07:00:00
     before: '19:00:00'
   action:
     service: light.turn_on
@@ -209,8 +193,7 @@
     data_template:
       transition: 90
       brightness: 10
-      
-- id: '8a'
+- id: 8a
   alias: raisedown bagno light with motion (night)
   trigger:
     platform: state
@@ -227,31 +210,67 @@
     data_template:
       transition: 45
       brightness: 1
-      
-      
 - id: '10'
   alias: all of if away
   trigger:
     platform: state
     entity_id: group.family
-    from: 'home'
+    from: home
   action:
     service: light.turn_off
     entity_id: group.all_lights
     data_template:
       transition: 10
-      
+
 - id: '11'
-  alias: all on on come back 
+  alias: all on on come back
   trigger:
     platform: state
     entity_id: group.family
-    to: 'home'
+    to: home
   action:
     service: light.turn_on
     entity_id: group.all_lights
     data_template:
       transition: 10
       brightness: 10
+
+- id: '12'
+  alias: Aggiorna Ultimo Movimento
+  trigger:
+  - platform: state
+    entity_id:
+    - binary_sensor.m_dressing
+    - binary_sensor.m_bagno
+    - binary_sensor.presence_7
+    - binary_sensor.presence_8
+    - binary_sensor.presence_11
+    to: 'on'
+  action:
+  - service: var.set
+    data:
+      entity_id: var.ultimo_movimento
+      value_template: '{{ now().strftime("%H:%M") }}'
       
-     
+      
+- id: '13'
+  alias: Aggiorna Ultima posizione Tami
+  trigger:
+  - platform: state
+    entity_id: sensor.geocoded_location
+  action:
+  - service: var.set
+    data:
+      entity_id: var.ultimo_aggiornamento_tami_phone
+      value_template: '{{ now().strftime("%H:%M") }}'
+      
+- id: '14'
+  alias: Aggiorna Ultima posizione Roby
+  trigger:
+  - platform: state
+    entity_id: sensor.geocoded_location_2
+  action:
+  - service: var.set
+    data:
+      entity_id: var.ultimo_aggiornamento_roby_phone
+      value_template: '{{ now().strftime("%H:%M") }}'

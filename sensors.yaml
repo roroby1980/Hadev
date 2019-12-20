@@ -93,11 +93,11 @@
         unit_of_measurement: 'W'
         value_template: "{{ (state_attr('light.livingroom', 'brightness') |int +1) * (10 /255)  }} "
       est_pow_livingroom_lights:
-        friendly_name: "Power light livingroom lights
+        friendly_name: "Power light livingroom lights"
         unit_of_measurement: 'W'
         value_template: '{% if switch.tasmota.state == ''on'' %} 15 {% elif  switch.tasmota.state == ''off'' %} 0 {% endif %}'
       est_pow_livingroom_led_lights:
-        friendly_name: "Power light livingroom LED
+        friendly_name: "Power light livingroom LED"
         unit_of_measurement: 'W'
         value_template: '{% if switch.sonoff.state == ''on'' %} 15 {% elif  switch.sonoff.state == ''off'' %} 0 {% endif %}'
 

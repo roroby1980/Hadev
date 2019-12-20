@@ -67,7 +67,7 @@
         est_W_l_cucina_2:
           friendly_name: "Power light cucina"
           unit_of_measurement: 'W'
-          value_template: "{{ (state_attr('light.l_cucina_2', 'brightness')|int +1) * (8.5 /100)  }} "
+          value_template: "{{ (state.light.l_cucina_2.attibutes["brightness"] |int +1) * (8.5 /100)  }} "
     
   - platform: template
     sensors:

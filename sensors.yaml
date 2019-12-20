@@ -61,6 +61,13 @@
     resource: "http://www.viaggiatreno.it/viaggiatrenonew/resteasy/viaggiatreno/andamentoTreno/S01101/1622"
     value_template: 'Treno 8:00'
     scan_interval: 30
+
+  - platform: template
+      sensors:
+        est_W_l_cucina_2:
+          friendly_name: "Power light cucina"
+          unit_of_measurement: 'W'
+          value_template: "{{ (state_attr('light.l_cucina_2', 'brightness')|int +1) * (8.5 /100)  }} "
     
   - platform: template
     sensors:

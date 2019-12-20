@@ -1,9 +1,3 @@
-  - platform: mqtt
-    name: "camera soggiorno"
-    state_topic: 'yicam/motion'
-
- 
- 
   #Cesano 6:30 --> 612
   #Cesano 7:00 --> 1614 --> N00074
   #Cesano 7:30 --> 618

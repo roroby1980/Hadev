@@ -67,31 +67,31 @@
       est_pow_l_cucina_2:
         friendly_name: "Power light cucina"
         unit_of_measurement: 'W'
-        value_template: "{{ (state_attr('light.l_cucina_2', 'brightness') |int +1) * (8.5 /255)  }} "
+        value_template: "{{ ((state_attr('light.l_cucina_2', 'brightness') |int +1) * (8.5 /255)) |round(2) }} "
       est_pow_l_bagno:
         friendly_name: "Power light bagno"
         unit_of_measurement: 'W'
-        value_template: "{{ (state_attr('light.l_bagno', 'brightness') |int +1) * (8.5 /255)  }} "
+        value_template: "{{ ((state_attr('light.l_bagno', 'brightness') |int +1) * (8.5 /255))  |round(2) }} "
       est_pow_l_bedroom:
         friendly_name: "Power light bedroom"
         unit_of_measurement: 'W'
-        value_template: "{{ (state_attr('light.l_bedroom', 'brightness') |int +1) * (8.5 /255)  }} "
+        value_template: "{{ ((state_attr('light.l_bedroom', 'brightness') |int +1) * (8.5 /255)) |round(2) }} "
       est_pow_l_dressingroom:
         friendly_name: "Power light dressingroom"
         unit_of_measurement: 'W'
-        value_template: "{{ (state_attr('light.l_dressingroom', 'brightness') |int +1) * (8.5 /255)  }} "
+        value_template: "{{ ((state_attr('light.l_dressingroom', 'brightness') |int +1) * (8.5 /255)) |round(2) }} "
       est_pow_bagno_lamp:
         friendly_name: "Power light bagno lamp"
         unit_of_measurement: 'W'
-        value_template: "{{ (state_attr('light.bagno', 'brightness') |int +1) * (10 /255)  }} "
+        value_template: "{{ ((state_attr('light.bagno', 'brightness') |int +1) * (10 /255)) |round(2) }} "
       est_pow_entrance:
         friendly_name: "Power light entrance"
         unit_of_measurement: 'W'
-        value_template: "{{ (state_attr('light.entrance', 'brightness') |int +1) * (10 /255)  }} "
+        value_template: "{{ ((state_attr('light.entrance', 'brightness') |int +1) * (10 /255)) |round(2) }} "
       est_pow_livingroom_l:
         friendly_name: "Power light livingroom yeelight"
         unit_of_measurement: 'W'
-        value_template: "{{ (state_attr('light.livingroom', 'brightness') |int +1) * (10 /255)  }} "
+        value_template: "{{ ((state_attr('light.livingroom', 'brightness') |int +1) * (10 /255)) |round(2) }} "
       est_pow_livingroom_lights:
         friendly_name: "Power light livingroom lights"
         unit_of_measurement: 'W'
@@ -101,7 +101,7 @@
         unit_of_measurement: 'W'
         value_template: '{% if states("switch.tasmota") == "on" %} 15 {% elif  states("switch.tasmota") == "off" %} 0 {% endif %}'
       current_power:
-        friendly_name: "Power light livingroom LED"
+        friendly_name: "Power light total"
         unit_of_measurement: 'W'
         value_template: ' {{ states("est_pow_l_cucina_2") |int
                          + states("est_pow_l_bagno") |int

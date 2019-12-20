@@ -1,9 +1,15 @@
   - platform: mqtt
+<<<<<<< HEAD
     name: "camera soggiorno"
     state_topic: 'yicam/motion'
 
  
  
+=======
+    state_topic: "yicam/motion"
+    name: "Motion camera"
+  
+>>>>>>> b0ba8c6a53b4ce5be182d481a203358f108f3919
   #Cesano 6:30 --> 612
   #Cesano 7:00 --> 1614 --> N00074
   #Cesano 7:30 --> 618
@@ -23,7 +29,7 @@
       - ritardo
       - stazioneUltimoRilevamento
       - compOraUltimoRilevamento
-    resource: "http://www.viaggiatreno.it/viaggiatrenonew/resteasy/viaggiatreno/andamentoTreno/N00079/612"
+    resource: "http://www.viaggiatreno.it/viaggiatrenonew/resteasy/viaggiatreno/andamentoTreno/S01101/612"
     value_template: 'Treno 6:30'
     scan_interval: 30
     
@@ -33,7 +39,8 @@
       - ritardo
       - stazioneUltimoRilevamento
       - compOraUltimoRilevamento
-    resource: "http://www.viaggiatreno.it/viaggiatrenonew/resteasy/viaggiatreno/andamentoTreno/N00074/1614"
+      #- fermate[fermate.lenght-1].stazione
+    resource: "http://www.viaggiatreno.it/viaggiatrenonew/resteasy/viaggiatreno/andamentoTreno/S01096/1614"
     value_template: 'Treno 7:00'
     scan_interval: 30
 
@@ -43,7 +50,7 @@
       - ritardo
       - stazioneUltimoRilevamento
       - compOraUltimoRilevamento
-    resource: "http://www.viaggiatreno.it/viaggiatrenonew/resteasy/viaggiatreno/andamentoTreno/N00079/618"
+    resource: "http://www.viaggiatreno.it/viaggiatrenonew/resteasy/viaggiatreno/andamentoTreno/S01101/618"
     value_template: 'Treno 7:30'
     scan_interval: 30
 
@@ -53,7 +60,7 @@
       - ritardo
       - stazioneUltimoRilevamento
       - compOraUltimoRilevamento
-    resource: "http://www.viaggiatreno.it/viaggiatrenonew/resteasy/viaggiatreno/andamentoTreno/N00085/2718"
+    resource: "http://www.viaggiatreno.it/viaggiatrenonew/resteasy/viaggiatreno/andamentoTreno/S01316/2718"
     value_template: 'Treno 7:35'
     scan_interval: 30  
 
@@ -63,7 +70,7 @@
       - ritardo
       - stazioneUltimoRilevamento
       - compOraUltimoRilevamento
-    resource: "http://www.viaggiatreno.it/viaggiatrenonew/resteasy/viaggiatreno/andamentoTreno/N00079/1622"
+    resource: "http://www.viaggiatreno.it/viaggiatrenonew/resteasy/viaggiatreno/andamentoTreno/S01101/1622"
     value_template: 'Treno 8:00'
     scan_interval: 30
     
